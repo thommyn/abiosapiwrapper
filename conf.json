@@ -1,0 +1,13 @@
+{
+  "ip": "localhost",
+  "port": "5005",
+  "routes": {
+    "/series/live": {"host": "https://api.abiosgaming.com/v2/series?starts_before=now&is_over=false", "converter": "none"},
+    "/players/live": {"host": "https://api.abiosgaming.com/v2/series?starts_before=now&is_over=false", "converter": "liveplayers"},
+    "/teams/live": {"host": "https://api.abiosgaming.com/v2/series?starts_before=now&is_over=false", "converter": "liveteams"},
+    "/test": {"host": "http://localhost:5000/api/test1", "converter": "liveplayers"}
+  },
+  "allowedqueryparameters": ["access_token", "page"],
+  "timePerToken": 2000,
+  "burstTokens": 5
+}
