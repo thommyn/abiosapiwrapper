@@ -21,19 +21,22 @@ func (c rostersSubNode) Convert(injson []interface{}) (outjson []interface{}, er
 		}
 	}()
 
+	// TODO: Simplify code.......
+
+	// array of {subNodeName} subnodes
 	var arr []interface{}
 	for _, serie := range injson {
-
-		// loop rosters array
-		rosters := serie.(map[string]interface{})["rosters"].([]interface{})
-		for _, roster := range rosters {
-
-			// loop players
-			subNodeArray := roster.	(map[string]interface{})[c.subNodeName].([]interface{})
-			for _, subNode := range subNodeArray {
-
-				// append player to array
-				arr = append(arr, subNode)
+		seriemap := serie.(map[string]interface{})
+		if rostersNode, ok := seriemap["rosters"]; ok {
+			rosters := rostersNode.([]interface{})
+			for _, roster := range rosters {
+				rostermap := roster.(map[string]interface{})
+				if subnode, ok := rostermap[c.subNodeName]; ok {
+					subnodes := subnode.([]interface{})
+					for _, node := range subnodes {
+						arr = append(arr, node)
+					}
+				}
 			}
 		}
 	}
