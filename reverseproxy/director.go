@@ -10,20 +10,20 @@ type Director interface {
 	Get() func(*http.Request)
 }
 
-type TargetDirector struct {
+type targetDirector struct {
 	target *url.URL
 }
 
 func NewTargetDirector(target *url.URL) Director {
-	return &TargetDirector{
+	return &targetDirector{
 		target: target,
 	}
 }
 
-func (td TargetDirector) Get() func(*http.Request) {
+func (td targetDirector) Get() func(*http.Request) {
 	return td.directorFunc
 }
-func (td TargetDirector) directorFunc(req *http.Request) {
+func (td targetDirector) directorFunc(req *http.Request) {
 	req.URL.Host = td.target.Host
 	req.URL.Scheme = td.target.Scheme
 	req.URL.Path = td.target.Path

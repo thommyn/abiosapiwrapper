@@ -6,12 +6,12 @@ type Timer interface {
 	Now() int64
 }
 
-type Clock struct {}
+type clock struct {}
 
 func NewClock() Timer {
-	return &Clock{}
+	return &clock{}
 }
 
-func (t Clock) Now() int64 {
+func (t clock) Now() int64 {
 	return time.Now().UnixNano() / int64(time.Millisecond)
 }

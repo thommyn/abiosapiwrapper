@@ -12,17 +12,17 @@ type RequestInspector interface {
 	Inspect(req *http.Request) error
 }
 
-type AllowQueryTypesInspector struct {
+type allowQueryTypesInspector struct {
 	allowedArgs []string
 }
 
 func NewAllowQueryTypesInspector(allowedArgs []string) RequestInspector {
-	return &AllowQueryTypesInspector{
+	return &allowQueryTypesInspector{
 		allowedArgs: allowedArgs,
 	}
 }
 
-func (insp AllowQueryTypesInspector) Inspect(req *http.Request) error {
+func (insp allowQueryTypesInspector) Inspect(req *http.Request) error {
 	if rawQuery := req.URL.RawQuery; rawQuery != "" {	
 		args := strings.Split(rawQuery, "&")
 		for _, arg  := range args {
@@ -36,7 +36,7 @@ func (insp AllowQueryTypesInspector) Inspect(req *http.Request) error {
 	return nil
 }
 
-func (AllowQueryTypesInspector) contains(val string, arr []string) bool {
+func (allowQueryTypesInspector) contains(val string, arr []string) bool {
 	sort.Strings(arr)
 	i := sort.SearchStrings(arr, val)
 	return i < len(arr) && arr[i] == val

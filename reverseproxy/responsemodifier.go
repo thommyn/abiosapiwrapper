@@ -14,21 +14,21 @@ type ResponseModifier interface {
 	Get() func(*http.Response) error
 }
 
-type JsonConvResponseModifier struct {
+type jsonConvResponseModifier struct {
 	converter jsonconv.JsonConverter
 }
 
 func NewJsonConvResponseModifier(converter jsonconv.JsonConverter) ResponseModifier {
-	return &JsonConvResponseModifier{
+	return &jsonConvResponseModifier{
 		converter: converter,
 	}
 }
 
-func (rm JsonConvResponseModifier) Get() func(*http.Response) error {
+func (rm jsonConvResponseModifier) Get() func(*http.Response) error {
 	return rm.modifyResponseFunc
 }
 
-func (rm JsonConvResponseModifier) modifyResponseFunc(resp *http.Response) error {
+func (rm jsonConvResponseModifier) modifyResponseFunc(resp *http.Response) error {
 	// no converter, just return...
 	if rm.converter == nil {
 		return nil
@@ -50,7 +50,7 @@ func (rm JsonConvResponseModifier) modifyResponseFunc(resp *http.Response) error
 	return nil
 }
 
-func (rm JsonConvResponseModifier) getConvertedResponseBody(resp *http.Response) (body []byte, err error) {
+func (rm jsonConvResponseModifier) getConvertedResponseBody(resp *http.Response) (body []byte, err error) {
 	// get json form body content
 	injson, err := rm.readBodyJson(resp)
 	if err != nil {
@@ -74,7 +74,7 @@ func (rm JsonConvResponseModifier) getConvertedResponseBody(resp *http.Response)
 	return newrespbody, nil
 }
 
-func (rm JsonConvResponseModifier) readBodyJson(resp *http.Response) (map[string]interface{}, error) {
+func (rm jsonConvResponseModifier) readBodyJson(resp *http.Response) (map[string]interface{}, error) {
 	defer resp.Body.Close()
 
 	decoder, err := rm.getBodyDecoder(resp)
@@ -91,7 +91,7 @@ func (rm JsonConvResponseModifier) readBodyJson(resp *http.Response) (map[string
 	return data, nil
 }
 
-func (rm JsonConvResponseModifier) getBodyDecoder(resp *http.Response) (*json.Decoder, error) {
+func (rm jsonConvResponseModifier) getBodyDecoder(resp *http.Response) (*json.Decoder, error) {
 	var decoder *json.Decoder
 
 	switch resp.Header.Get("Content-Encoding") {
@@ -109,7 +109,7 @@ func (rm JsonConvResponseModifier) getBodyDecoder(resp *http.Response) (*json.De
 	return decoder, nil
 }
 
-func (rm JsonConvResponseModifier) updateResponseBody(resp *http.Response, newrespbody []byte) error {
+func (rm jsonConvResponseModifier) updateResponseBody(resp *http.Response, newrespbody []byte) error {
 	buf, err := rm.getBodyBytesBuffer(resp, newrespbody)
 	if err != nil {
 		return err
@@ -128,7 +128,7 @@ func (rm JsonConvResponseModifier) updateResponseBody(resp *http.Response, newre
 	return nil
 }
 
-func (rm JsonConvResponseModifier) getBodyBytesBuffer(resp *http.Response, newrespbody []byte) (buf *bytes.Buffer, err error) {
+func (rm jsonConvResponseModifier) getBodyBytesBuffer(resp *http.Response, newrespbody []byte) (buf *bytes.Buffer, err error) {
 	switch resp.Header.Get("Content-Encoding") {
 	case "gzip":
 		buf, err = rm.encodeContentAsGzip(newrespbody)
@@ -142,7 +142,7 @@ func (rm JsonConvResponseModifier) getBodyBytesBuffer(resp *http.Response, newre
 	return buf, nil
 }
 
-func (rm JsonConvResponseModifier) encodeContentAsGzip(data []byte) (*bytes.Buffer, error) {
+func (rm jsonConvResponseModifier) encodeContentAsGzip(data []byte) (*bytes.Buffer, error) {
 	var buf bytes.Buffer
 	gz := gzip.NewWriter(&buf)
 	if _, err := gz.Write(data); err != nil {

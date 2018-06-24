@@ -11,7 +11,7 @@ type TokenBucket interface {
 	Consume(tokens int64) error
 }
 
-type StandardTokenBucket struct {
+type standardTokenBucket struct {
 	timer Timer
 	metric Metric
 	availableTokens int64
@@ -21,7 +21,7 @@ type StandardTokenBucket struct {
 }
 
 func NewStandardTokenBucket(timer Timer, metric Metric, timePerToken int64, burstTokens int64) TokenBucket {
-	return &StandardTokenBucket{
+	return &standardTokenBucket{
 		timer:            timer,
 		metric:           metric,
 		availableTokens:  burstTokens,
@@ -31,21 +31,21 @@ func NewStandardTokenBucket(timer Timer, metric Metric, timePerToken int64, burs
 	}
 }
 
-func (tb *StandardTokenBucket) GetNextNewTokenTime() int64 {
+func (tb *standardTokenBucket) GetNextNewTokenTime() int64 {
 	return tb.nextNewTokenTime
 }
 
-func (tb *StandardTokenBucket) GetAvailableTokens() int64 {
+func (tb *standardTokenBucket) GetAvailableTokens() int64 {
 	return tb.availableTokens
 }
 
 // Consume one token
-func (tb *StandardTokenBucket) ConsumeOneToken() error {
+func (tb *standardTokenBucket) ConsumeOneToken() error {
 	return tb.Consume(1)
 }
 
 // Consume specified number of tokens
-func (tb *StandardTokenBucket) Consume(tokens int64) error {
+func (tb *standardTokenBucket) Consume(tokens int64) error {
 	if tokens <= 0 {
 		return fmt.Errorf("tokens to consume must be a positive integer")
 	}
@@ -65,7 +65,7 @@ func (tb *StandardTokenBucket) Consume(tokens int64) error {
 }
 
 // Update available tokens
-func (tb *StandardTokenBucket) update() {
+func (tb *standardTokenBucket) update() {
 	// get number of created tokens since last update
 	time := tb.timer.Now()
 	tokensCreated := tb.getTokensCreated(time)
@@ -84,7 +84,7 @@ func (tb *StandardTokenBucket) update() {
 	tb.nextNewTokenTime += (tokensCreated+1)*tb.timePerToken
 }
 
-func (tb *StandardTokenBucket) getTokensCreated(time int64) int64 {
+func (tb *standardTokenBucket) getTokensCreated(time int64) int64 {
 	if time < tb.nextNewTokenTime {
 		return 0
 	}

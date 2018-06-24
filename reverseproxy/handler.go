@@ -11,7 +11,7 @@ type Handler interface {
 	Get() func(http.ResponseWriter, *http.Request)
 }
 
-type HttpHandler struct {
+type httpHandler struct {
 	p *httputil.ReverseProxy
 	reqinsp RequestInspector
 	tb tokenbucket.TokenBucket
@@ -19,18 +19,18 @@ type HttpHandler struct {
 
 func NewHttpHandler(p *httputil.ReverseProxy, reqinsp RequestInspector,
 	tb tokenbucket.TokenBucket) Handler {
-	return &HttpHandler{
+	return &httpHandler{
 		p: p,
 		reqinsp: reqinsp,
 		tb: tb,
 	}
 }
 
-func (hh HttpHandler) Get() func(http.ResponseWriter, *http.Request) {
+func (hh httpHandler) Get() func(http.ResponseWriter, *http.Request) {
 	return hh.handlerFunc
 }
 
-func (hh HttpHandler) handlerFunc(w http.ResponseWriter, req *http.Request) {
+func (hh httpHandler) handlerFunc(w http.ResponseWriter, req *http.Request) {
 	log.Println("request:", req.RemoteAddr, "want", req.RequestURI)
 
 	// inspect request
