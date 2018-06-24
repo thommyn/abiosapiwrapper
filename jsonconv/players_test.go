@@ -37,7 +37,7 @@ func Test_Convert_SimpleJson_ReturnPlayerNodesArrays(t *testing.T) {
 	}
 }
 
-func Test_Convert_StrangeJson_ReturnError(t *testing.T) {
+func Test_Convert_StrangeJson_ReturnEmptyArray(t *testing.T) {
 	testJson :=
 		`[{"id":1}, {"id":2}]`
 
@@ -49,7 +49,29 @@ func Test_Convert_StrangeJson_ReturnError(t *testing.T) {
 		t.Errorf("Unable to unmarshal test json bytes. %s", err.Error())
 	}
 
-	if _, err := conv.Convert(data); err == nil {
-		t.Errorf("Converting an invalid json does not return an error message.")
+	res, err := conv.Convert(data)
+	if err != nil {
+		t.Errorf("An unexpected error occured when converting json. %s", err)
+	}
+	if len(res) != 0 {
+		t.Errorf("Non zero array returned.")
+	}
+}
+
+func Test_Players_Convert_EmptyArrays_NoErrorReturned(t *testing.T) {
+	testJson :=
+		`[{"id":1,"rosters":[{"id":10,"players":[]},{"id":11,"players":[{"id":110},{"id":111}]}]},{"id":2,"rosters":[]}]`
+
+	conv := NewPlayersFromSeries()
+	bytes := []byte(testJson)
+	var data []interface{}
+	err := json.Unmarshal(bytes, &data)
+	if err != nil {
+		t.Errorf("Unable to unmarshal test json bytes. %s", err.Error())
+	}
+
+	_, err = conv.Convert(data)
+	if err != nil {
+		t.Errorf("Unexpected error occured when converting empty nodes. %s", err.Error())
 	}
 }
