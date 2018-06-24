@@ -16,7 +16,7 @@ func Test_Consume_InitialStateConsumeOne_ReturnBurstTokensMinusOne(t *testing.T)
 	var expectedAvailableTokens int64 = 99
 
 	clock := new(testClock)
-	metric := new(TimeMetric)
+	metric := NewTimeMetric()
 	bucket := NewStandardTokenBucket(clock, metric, ticksPerToken, burstTokens)
 
 	bucket.Consume(1)
@@ -37,7 +37,7 @@ func Test_Consume_TimeElapsed_ReturnCorrectNumberOfTokensAndNewTime(t *testing.T
 	var expectedNextNewTokenTime int64 = 210
 
 	clock := new(testClock)
-	metric := new(TimeMetric)
+	metric := NewTimeMetric()
 	bucket := NewStandardTokenBucket(clock, metric, ticksPerToken, burstTokens)
 
 	bucket.Consume(50)
@@ -66,7 +66,7 @@ func Test_GetNewTokens_TooManyTokensConsumed_Error(t *testing.T) {
 	var burstTokens int64 = 100
 
 	clock := new(testClock)
-	metric := new(TimeMetric)
+	metric := NewTimeMetric()
 	tb := NewStandardTokenBucket(clock, metric, ticksPerToken, burstTokens)
 
 	err := tb.Consume(120)
