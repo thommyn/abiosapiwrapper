@@ -2,7 +2,7 @@ package reverseproxy
 
 import (
 	"net/http"
-	"../jsonconv"
+	"../jquery"
 	"encoding/json"
 	"io/ioutil"
 	"bytes"
@@ -15,10 +15,10 @@ type ResponseModifier interface {
 }
 
 type jsonQueryResponseModifier struct {
-	converter jsonconv.JsonQuery
+	converter jquery.JsonQuery
 }
 
-func NewJsonConvResponseModifier(converter jsonconv.JsonQuery) ResponseModifier {
+func NewJsonConvResponseModifier(converter jquery.JsonQuery) ResponseModifier {
 	return &jsonQueryResponseModifier {
 		converter: converter,
 	}
