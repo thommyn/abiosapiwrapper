@@ -5,9 +5,9 @@
   "burstTokens": 5,
   "allowedqueryparameters": ["access_token", "page"],
   "routes": {
-    "/series/live": {"host": "https://api.abiosgaming.com/v2/series?starts_before=now&is_over=false", "converter": "none"},
-    "/players/live": {"host": "https://api.abiosgaming.com/v2/series?starts_before=now&is_over=false", "converter": "liveplayers"},
-    "/teams/live": {"host": "https://api.abiosgaming.com/v2/series?starts_before=now&is_over=false", "converter": "liveteams"},
-    "/test": {"host": "http://localhost:5000/api/test1", "converter": "liveplayers"}
+    "/series/live": {"host": "https://api.abiosgaming.com/v2/series?starts_before=now&is_over=false", "jquery": "*"},
+    "/players/live": {"host": "https://api.abiosgaming.com/v2/series?starts_before=now&is_over=false", "jquery": "rosters/players/*"},
+    "/teams/live": {"host": "https://api.abiosgaming.com/v2/series?starts_before=now&is_over=false", "jquery": "roster/teams/*"},
+    "/test": {"host": "http://localhost:5000/api/test1", "jquery": "rosters/players/*"}
   }
 }
