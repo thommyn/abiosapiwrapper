@@ -61,7 +61,7 @@ func Test_Consume_TimeElapsed_ReturnCorrectNumberOfTokensAndNewTime(t *testing.T
 	}
 }
 
-func Test_GetNewTokens_TooManyTokensConsumed_Error(t *testing.T) {
+func Test_Consume_TooManyTokensConsumedError(t *testing.T) {
 	var ticksPerToken int64 = 10
 	var burstTokens int64 = 100
 
