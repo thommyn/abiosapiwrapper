@@ -8,6 +8,9 @@ import (
 	"fmt"
 )
 
+const RawQuerySeparator = "&"
+const RawQueryKeyValueSeparator = "="
+
 type RequestInspector interface {
 	Inspect(req *http.Request) error
 }
@@ -23,13 +26,16 @@ func NewAllowQueryTypesInspector(allowedArgs []string) RequestInspector {
 }
 
 func (insp allowQueryTypesInspector) Inspect(req *http.Request) error {
-	if rawQuery := req.URL.RawQuery; rawQuery != "" {	
-		args := strings.Split(rawQuery, "&")
-		for _, arg  := range args {
-			argkey := strings.Split(arg, "=")[0]
-			if !insp.contains(argkey, insp.allowedArgs) {
-				return errors.New(fmt.Sprintf("invalid request, %s is not allowed", argkey))
-			}
+	rawQuery := req.URL.RawQuery
+	if rawQuery == "" {
+		return nil
+	}
+
+	args := strings.Split(rawQuery, RawQuerySeparator)
+	for _, arg := range args {
+		argkey := strings.Split(arg, RawQueryKeyValueSeparator)[0]
+		if !insp.contains(argkey, insp.allowedArgs) {
+			return errors.New(fmt.Sprintf("invalid request, %s is not allowed", argkey))
 		}
 	}
 
