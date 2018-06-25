@@ -8,13 +8,13 @@ import (
 	"./config"
 	"./reverseproxy"
 	"./tokenbucket"
-	"./jsonconv"
+	"./jquery"
 )
 
 var inspector reverseproxy.RequestInspector
 var tokenBucket tokenbucket.TokenBucket
 var transporter reverseproxy.Transporter
-var jsonQueryFactory jsonconv.JsonQueryFactory
+var jsonQueryFactory jquery.JsonQueryFactory
 
 func main() {
 	log.Print("Init logger")
@@ -52,7 +52,7 @@ func setupDependencies(conf *config.Config) {
 
 	transporter = reverseproxy.NewHttpTransport()
 
-	jsonQueryFactory = jsonconv.NewDefaultJsonConverterFactory()
+	jsonQueryFactory = jquery.NewDefaultJsonConverterFactory()
 }
 
 func initRoutes(routes map[string]config.Target, transporter reverseproxy.Transporter) error {
