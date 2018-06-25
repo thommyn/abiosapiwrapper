@@ -10,8 +10,8 @@ import (
 	"crypto/md5"
 )
 
-type staticJsonConverter struct {}
-func (staticJsonConverter) Convert(injson []interface{}) (outjson []interface{}, err error) {
+type staticJsonQuery struct {}
+func (staticJsonQuery) GetSubNodes(jsonData []interface{}) (nodes []interface{}, err error) {
 	testJsonStr := `[{"id": 1}, {"id": 2}]`
 	var testJson []interface{}
 	json.Unmarshal([]byte(testJsonStr), &testJson)
@@ -40,7 +40,7 @@ func getFakeHttpResponse() *http.Response {
 }
 
 func Test_ModifyResponseFunc_StatusCode402_ReturnsUnmodifiedBody(t *testing.T) {
-	responseModifier := NewJsonConvResponseModifier(&staticJsonConverter{})
+	responseModifier := NewJsonConvResponseModifier(&staticJsonQuery{})
 	fakeHttpResponse := getFakeHttpResponse()
 	fakeHttpResponse.StatusCode = 402
 
@@ -81,7 +81,7 @@ func Test_ModifyResponseFunc_ReturnsCorrectModifedResponse(t *testing.T) {
 	expectedStatusCode := 200
 	expectedContentLengthHeaderValue := strconv.Itoa(expectedContentLength)
 
-	responseModifier := NewJsonConvResponseModifier(&staticJsonConverter{})
+	responseModifier := NewJsonConvResponseModifier(&staticJsonQuery{})
 	fakeHttpResponse := getFakeHttpResponse()
 
 	err := responseModifier.Get()(fakeHttpResponse)
