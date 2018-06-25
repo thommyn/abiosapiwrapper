@@ -7,7 +7,7 @@ import (
 
 type Target struct {
 	Host string
-	Converter string
+	JQuery string
 }
 
 type Config struct {
@@ -17,25 +17,6 @@ type Config struct {
 	AllowedQueryParameters []string
 	TimePerToken int64
 	BurstTokens int64
-}
-
-func LoadDefaultConfig() *Config {
-	routes := map[string]Target {
-		"/series/live": Target{Host: "https://api.abiosgaming.com/v2/series?starts_before=now&is_over=false", Converter: "none"},
-		"/players/live": Target{Host: "https://api.abiosgaming.com/v2/series?starts_before=now&is_over=false", Converter: "liveplayers"},
-		"/teams/live": Target{Host: "https://api.abiosgaming.com/v2/series?starts_before=now&is_over=false", Converter: "liveteams"},
-	}
-
-	conf := Config {
-		IP: "localhost",
-		Port: "8080",
-		Routes: routes,
-		AllowedQueryParameters: []string{"access_token", "page"},
-		TimePerToken: 2000,
-		BurstTokens: 5,
-	}
-
-	return &conf
 }
 
 func LoadConfig(path string) (*Config, error) {
