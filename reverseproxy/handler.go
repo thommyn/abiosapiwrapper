@@ -17,8 +17,7 @@ type httpHandler struct {
 	tb      tokenbucket.TokenBucket
 }
 
-func NewHttpHandler(p *httputil.ReverseProxy, reqinsp RequestInspector,
-	tb tokenbucket.TokenBucket) Handler {
+func NewHttpHandler(p *httputil.ReverseProxy, reqinsp RequestInspector, tb tokenbucket.TokenBucket) Handler {
 	return &httpHandler{
 		p:       p,
 		reqinsp: reqinsp,

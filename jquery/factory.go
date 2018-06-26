@@ -6,12 +6,12 @@ type JsonQueryFactory interface {
 	Get(path string) JsonQuery
 }
 
-type defaultJsonQueryFactory struct {}
+type jqueryJsonQueryFactory struct {}
 
-func NewDefaultJsonConverterFactory() JsonQueryFactory {
-	return &defaultJsonQueryFactory{}
+func NewJqueryJsonConverterFactory() JsonQueryFactory {
+	return &jqueryJsonQueryFactory{}
 }
 
-func (f defaultJsonQueryFactory) Get(path string) JsonQuery {
+func (f jqueryJsonQueryFactory) Get(path string) JsonQuery {
 	return NewJsonQuery(path, PathNodeSeparator)
 }

@@ -52,7 +52,7 @@ func setupDependencies(conf *config.Config) {
 
 	transporter = reverseproxy.NewHttpTransport()
 
-	jsonQueryFactory = jquery.NewDefaultJsonConverterFactory()
+	jsonQueryFactory = jquery.NewJqueryJsonConverterFactory()
 }
 
 func initRoutes(routes map[string]config.Target, transporter reverseproxy.Transporter) error {
@@ -62,17 +62,16 @@ func initRoutes(routes map[string]config.Target, transporter reverseproxy.Transp
 			return err
 		}
 
-		conv := jsonQueryFactory.Get(target.JQuery)
+		jquery := jsonQueryFactory.Get(target.JQuery)
 		if err != nil {
 			return err
 		}
 
 		// setup a handler for specified target...
-		responseModifier := reverseproxy.NewJsonConvResponseModifier(conv)
+		responseModifier := reverseproxy.NewJsonConvResponseModifier(jquery)
 		director := reverseproxy.NewTargetDirector(targetUrl)
 		p := reverseproxy.NewReverseProxy(director, responseModifier, transporter)
 		handler := reverseproxy.NewHttpHandler(p, inspector, tokenBucket)
-
 		http.HandleFunc(hostPath, handler.Get())
 
 		log.Printf("%s > %s", hostPath, target)

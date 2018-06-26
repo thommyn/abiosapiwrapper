@@ -6,8 +6,8 @@ import (
 
 func NewReverseProxy(director Director, responseModifier ResponseModifier, transporter Transporter) *httputil.ReverseProxy {
 	return &httputil.ReverseProxy{
-		Director: director.Get(),
+		Director:       director.Get(),
 		ModifyResponse: responseModifier.Get(),
-		Transport: transporter.Get(),
+		Transport:      transporter.Get(),
 	}
 }

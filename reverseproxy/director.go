@@ -23,6 +23,7 @@ func NewTargetDirector(target *url.URL) Director {
 func (td targetDirector) Get() func(*http.Request) {
 	return td.directorFunc
 }
+
 func (td targetDirector) directorFunc(req *http.Request) {
 	req.URL.Host = td.target.Host
 	req.URL.Scheme = td.target.Scheme

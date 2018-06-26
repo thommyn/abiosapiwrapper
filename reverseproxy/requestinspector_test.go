@@ -5,7 +5,7 @@ import (
 	"net/http"
 )
 
-func Test_AllowQueryTypesInspector_NotAllowedArgs_ReturnsError(t *testing.T) {
+func Test_Inspect_NotAllowedArgs_ReturnsError(t *testing.T) {
 	allowedQueryTypes := []string{"access_token"}
 
 	req, err := http.NewRequest("GET",
@@ -22,7 +22,7 @@ func Test_AllowQueryTypesInspector_NotAllowedArgs_ReturnsError(t *testing.T) {
 	}
 }
 
-func Test_AllowQueryTypesInspector_AllowedArg_NoErrorReturned(t *testing.T) {
+func Test_Inspect_AllowedArg_NoErrorReturned(t *testing.T) {
 	allowedQueryTypes := []string{"access_token"}
 
 	req, err := http.NewRequest("GET",
@@ -39,7 +39,7 @@ func Test_AllowQueryTypesInspector_AllowedArg_NoErrorReturned(t *testing.T) {
 	}
 }
 
-func Test_AllowQueryTypesInspector_AllowedArgs_NoErrorReturned(t *testing.T) {
+func Test_Inspect_AllowedArgs_NoErrorReturned(t *testing.T) {
 	allowedQueryTypes := []string{"access_token", "page"}
 
 	req, err := http.NewRequest("GET",

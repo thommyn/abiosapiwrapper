@@ -7,7 +7,7 @@ import (
 	"fmt"
 )
 
-func Test_Convert_SimpleJson_ReturnPlayerNodesArrays(t *testing.T) {
+func Test_GetSubNodes_PlayersJson_ReturnPlayerNodesArray(t *testing.T) {
 	testJson :=
 		`[{"id":1,"rosters":[{"id":10,"players":[{"id":100},{"id":101}]},{"id":11,"players":[{"id":110},{"id":111}]}]},
 		{"id":2,"rosters":[{"id":20,"players":[{"id":200},{"id":201}]},{"id":21,"players":[{"id":210},{"id":211}]}]}]`
@@ -27,7 +27,7 @@ func Test_Convert_SimpleJson_ReturnPlayerNodesArrays(t *testing.T) {
 	}
 }
 
-func Test_Convert_StrangeJson_ReturnNil(t *testing.T) {
+func Test_GetSubNodes_InvalidJson_ReturnNull(t *testing.T) {
 	testJson :=	`[{"id":1}, {"id":2}]`
 	var expectedResult string = "null"
 
@@ -45,7 +45,7 @@ func Test_Convert_StrangeJson_ReturnNil(t *testing.T) {
 	}
 }
 
-func Test_Players_Convert_EmptyArrays_NoErrorReturned(t *testing.T) {
+func Test_GetSubNodes_EmptyArrays_ReturnCorrectNodes(t *testing.T) {
 	testJson :=
 		`[{"id":1,"rosters":[{"id":10,"players":[]},{"id":11,"players":[{"id":110},{"id":111}]}]},{"id":2,"rosters":[]}]`
 	expectedResult := `[{"id":110},{"id":111}]`
