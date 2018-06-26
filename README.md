@@ -44,6 +44,7 @@ jquery is specified according to node_1/node_2/.../node_n/\*, where \* gets all 
   * __jsonquery.go__: Jquery object used when querying subnodes for a specified path and json-object.
   * __jsonquery_test.go__: Testclass for jsonquery.go.
 * _reverseproxy_
+  * __constants.go__: Constants used in the reverseproxy package.
   * __director.go__: Redirecting host -> target (also combining query strings).
   * __handler.go__: Handling request, i.e. inspecting request, checking bandwidth limits.
   * __proxy.go__: Implementation of go reverse proxy.
