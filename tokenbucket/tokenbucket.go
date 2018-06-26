@@ -1,7 +1,7 @@
 package tokenbucket
 
 import (
-	"fmt"
+	"errors"
 )
 
 type TokenBucket interface {
@@ -12,12 +12,12 @@ type TokenBucket interface {
 }
 
 type standardTokenBucket struct {
-	timer Timer
-	metric Metric
-	availableTokens int64
-	timePerToken int64
+	timer            Timer
+	metric           Metric
+	availableTokens  int64
+	timePerToken     int64
 	nextNewTokenTime int64
-	burstTokens int64
+	burstTokens      int64
 }
 
 func NewStandardTokenBucket(timer Timer, metric Metric, timePerToken int64, burstTokens int64) TokenBucket {
@@ -47,7 +47,7 @@ func (tb *standardTokenBucket) ConsumeOneToken() error {
 // Consume specified number of tokens
 func (tb *standardTokenBucket) Consume(tokens int64) error {
 	if tokens <= 0 {
-		return fmt.Errorf("tokens to consume must be a positive integer")
+		return errors.New("tokens to consume must be a positive integer")
 	}
 
 	// updates token bucket with new tokens according
@@ -55,7 +55,7 @@ func (tb *standardTokenBucket) Consume(tokens int64) error {
 	// to consume specified amount
 	tb.update()
 	if tokens > tb.availableTokens {
-		return fmt.Errorf("not enough available tokens to consume")
+		return errors.New("not enough available tokens to consume")
 	}
 
 	// consume tokens
@@ -73,7 +73,7 @@ func (tb *standardTokenBucket) update() {
 		return
 	}
 
-	// update number of available tokent
+	// update number of available tokens
 	newAvailableTokens := tb.availableTokens + tokensCreated
 	if newAvailableTokens > tb.burstTokens {
 		newAvailableTokens = tb.burstTokens

@@ -50,7 +50,7 @@ func (rm jsonQueryResponseModifier) modifyResponseFunc(resp *http.Response) erro
 	return nil
 }
 
-func (rm jsonQueryResponseModifier) getConvertedResponseBody(resp *http.Response) (body []byte, err error) {
+func (rm jsonQueryResponseModifier) getConvertedResponseBody(resp *http.Response) ([]byte, error) {
 	// get json form body content
 	injson, err := rm.readBodyJson(resp)
 	if err != nil {
