@@ -7,6 +7,6 @@
   "routes": {
     "/series/live": {"host": "https://api.abiosgaming.com/v2/series?starts_before=now&is_over=false", "jquery": "*"},
     "/players/live": {"host": "https://api.abiosgaming.com/v2/series?starts_before=now&is_over=false", "jquery": "rosters/players/*"},
-    "/teams/live": {"host": "https://api.abiosgaming.com/v2/series?starts_before=now&is_over=false", "jquery": "roster/teams/*"}
+    "/teams/live": {"host": "https://api.abiosgaming.com/v2/series?starts_before=now&is_over=false", "jquery": "rosters/teams/*"}
   }
 }
