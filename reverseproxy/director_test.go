@@ -6,7 +6,7 @@ import (
 	"net/http"
 )
 
-func Test_DirectorFunc_NotAllowedArgs_ReturnsError(t *testing.T) {
+func Test_DirectorFunc_RequestUpdate_RequestUpdatedCorrectly(t *testing.T) {
 	var expectedRawQuery string = "q1=1&q2=2&q3=3&q4=4"
 
 	target := &url.URL{
