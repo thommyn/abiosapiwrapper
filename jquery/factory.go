@@ -3,7 +3,7 @@ package jquery
 const PathNodeSeparator = "/"
 
 type JsonQueryFactory interface {
-	Get(convType string) JsonQuery
+	Get(path string) JsonQuery
 }
 
 type defaultJsonQueryFactory struct {}
