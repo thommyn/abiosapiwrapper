@@ -1,5 +1,7 @@
 # abiosapiwrapper
 
+Reverse proxy wrapper for the ABIOS esports api implementing bandwith and burst limits and also a feature to query subnodes in the response json.
+
 ## Config
 
 Configuration of the reverse proxy is specified in the conf.json file according to the example below.
