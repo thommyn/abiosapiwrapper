@@ -2,10 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="47a7a13a-81f6-4f72-9ce4-75a35f8104f3" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/reverseproxy/constants.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/reverseproxy/handler.go" beforeDir="false" afterPath="$PROJECT_DIR$/reverseproxy/handler.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/reverseproxy/responsemodifier.go" beforeDir="false" afterPath="$PROJECT_DIR$/reverseproxy/responsemodifier.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/conf.json" beforeDir="false" afterPath="$PROJECT_DIR$/conf.json" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -16,11 +13,29 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="constants.go" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/reverseproxy/constants.go">
+      <file leaf-file-name="jsonquery_test.go" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/jquery/jsonquery_test.go">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="136">
-              <caret line="8" lean-forward="true" selection-start-line="8" selection-end-line="8" />
+            <state relative-caret-position="187">
+              <caret line="49" column="120" lean-forward="true" selection-start-line="49" selection-start-column="9" selection-end-line="49" selection-end-column="120" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="conf.json" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/conf.json">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="187">
+              <caret line="11" column="3" lean-forward="true" selection-start-line="11" selection-start-column="3" selection-end-line="11" selection-end-column="3" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="main.go" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/main.go">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="221">
+              <caret line="22" selection-start-line="22" selection-end-line="22" />
             </state>
           </provider>
         </entry>
@@ -74,16 +89,16 @@
         <option value="$PROJECT_DIR$/jquery/factory.go" />
         <option value="$PROJECT_DIR$/reverseproxy/director.go" />
         <option value="$PROJECT_DIR$/reverseproxy/proxy.go" />
-        <option value="$PROJECT_DIR$/jquery/jsonquery_test.go" />
         <option value="$PROJECT_DIR$/reverseproxy/requestinspector_test.go" />
         <option value="$PROJECT_DIR$/tokenbucket/tokenbucket.go" />
         <option value="$PROJECT_DIR$/reverseproxy/responsemodifier_test.go" />
         <option value="$PROJECT_DIR$/main.go" />
-        <option value="$PROJECT_DIR$/conf.json" />
         <option value="$PROJECT_DIR$/reverseproxy/director_test.go" />
         <option value="$PROJECT_DIR$/reverseproxy/responsemodifier.go" />
         <option value="$PROJECT_DIR$/reverseproxy/handler.go" />
         <option value="$PROJECT_DIR$/reverseproxy/constants.go" />
+        <option value="$PROJECT_DIR$/conf.json" />
+        <option value="$PROJECT_DIR$/jquery/jsonquery_test.go" />
       </list>
     </option>
   </component>
@@ -116,7 +131,7 @@
             <path>
               <item name="abiosapiwrapper" type="b2602c69:ProjectViewProjectNode" />
               <item name="abiosapiwrapper" type="462c0819:PsiDirectoryNode" />
-              <item name="reverseproxy" type="462c0819:PsiDirectoryNode" />
+              <item name="jquery" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -183,7 +198,7 @@
       <window_info anchor="bottom" id="Version Control" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="bottom" id="Terminal" />
-      <window_info anchor="bottom" id="Debug" order="3" visible="true" weight="0.27086183" />
+      <window_info anchor="bottom" id="Debug" order="3" visible="true" weight="0.39261284" />
       <window_info id="Favorites" side_tool="true" />
       <window_info anchor="bottom" id="Find" order="1" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
@@ -254,13 +269,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/main.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="238">
-          <caret line="65" column="23" lean-forward="true" selection-start-line="65" selection-start-column="23" selection-end-line="65" selection-end-column="23" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://C:/Go/src/net/http/httputil/reverseproxy.go">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-493">
@@ -282,13 +290,6 @@
           <folding>
             <element signature="e#22#53#0" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/conf.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="8" column="119" selection-start-line="8" selection-start-column="119" selection-end-line="8" selection-end-column="119" />
         </state>
       </provider>
     </entry>
@@ -348,13 +349,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/jquery/jsonquery_test.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1275">
-          <caret line="80" lean-forward="true" selection-start-line="80" selection-end-line="80" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/reverseproxy/director.go">
       <provider selected="true" editor-type-id="text-editor">
         <state>
@@ -394,6 +388,27 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="136">
           <caret line="8" lean-forward="true" selection-start-line="8" selection-end-line="8" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/conf.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="187">
+          <caret line="11" column="3" lean-forward="true" selection-start-line="11" selection-start-column="3" selection-end-line="11" selection-end-column="3" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="221">
+          <caret line="22" selection-start-line="22" selection-end-line="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/jquery/jsonquery_test.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="187">
+          <caret line="49" column="120" lean-forward="true" selection-start-line="49" selection-start-column="9" selection-end-line="49" selection-end-column="120" />
         </state>
       </provider>
     </entry>
