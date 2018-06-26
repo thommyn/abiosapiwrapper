@@ -22,6 +22,12 @@ func NewJsonQuery(path string, separator string) *jsonQuery {
 }
 
 func (q jsonQuery) GetSubNodes(jsonData []interface{}) (nodes []interface{}, err error) {
+	defer func() {
+		if recover() != nil {
+			err = errors.New("unable to convert supplied json")
+		}
+	}()
+
 	return q.getSubNodes(q.path, jsonData)
 }
 
