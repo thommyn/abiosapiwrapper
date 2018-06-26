@@ -2,7 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="47a7a13a-81f6-4f72-9ce4-75a35f8104f3" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/reverseproxy/director_test.go" beforeDir="false" afterPath="$PROJECT_DIR$/reverseproxy/director_test.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/reverseproxy/constants.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/reverseproxy/handler.go" beforeDir="false" afterPath="$PROJECT_DIR$/reverseproxy/handler.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/reverseproxy/responsemodifier.go" beforeDir="false" afterPath="$PROJECT_DIR$/reverseproxy/responsemodifier.go" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -13,16 +16,23 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="director_test.go" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/reverseproxy/director_test.go">
+      <file leaf-file-name="constants.go" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/reverseproxy/constants.go">
           <provider selected="true" editor-type-id="text-editor">
-            <state>
-              <caret lean-forward="true" />
+            <state relative-caret-position="136">
+              <caret line="8" lean-forward="true" selection-start-line="8" selection-end-line="8" />
             </state>
           </provider>
         </entry>
       </file>
     </leaf>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Go File" />
+      </list>
+    </option>
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
@@ -63,16 +73,17 @@
         <option value="$PROJECT_DIR$/tokenbucket/metric.go" />
         <option value="$PROJECT_DIR$/jquery/factory.go" />
         <option value="$PROJECT_DIR$/reverseproxy/director.go" />
-        <option value="$PROJECT_DIR$/reverseproxy/handler.go" />
         <option value="$PROJECT_DIR$/reverseproxy/proxy.go" />
         <option value="$PROJECT_DIR$/jquery/jsonquery_test.go" />
         <option value="$PROJECT_DIR$/reverseproxy/requestinspector_test.go" />
         <option value="$PROJECT_DIR$/tokenbucket/tokenbucket.go" />
         <option value="$PROJECT_DIR$/reverseproxy/responsemodifier_test.go" />
         <option value="$PROJECT_DIR$/main.go" />
-        <option value="$PROJECT_DIR$/reverseproxy/responsemodifier.go" />
         <option value="$PROJECT_DIR$/conf.json" />
         <option value="$PROJECT_DIR$/reverseproxy/director_test.go" />
+        <option value="$PROJECT_DIR$/reverseproxy/responsemodifier.go" />
+        <option value="$PROJECT_DIR$/reverseproxy/handler.go" />
+        <option value="$PROJECT_DIR$/reverseproxy/constants.go" />
       </list>
     </option>
   </component>
@@ -115,6 +126,7 @@
     </panes>
   </component>
   <component name="PropertiesComponent">
+    <property name="DefaultGoTemplateProperty" value="Go File" />
     <property name="configurable.Global.GOPATH.is.expanded" value="true" />
     <property name="configurable.Module.GOPATH.is.expanded" value="false" />
     <property name="configurable.Project.GOPATH.is.expanded" value="true" />
@@ -256,13 +268,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/reverseproxy/responsemodifier.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-2378">
-          <caret lean-forward="true" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/reverseproxy/transport.go">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="357">
@@ -277,20 +282,6 @@
           <folding>
             <element signature="e#22#53#0" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/reverseproxy/requestinspector.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="221">
-          <caret line="28" column="32" lean-forward="true" selection-start-line="28" selection-start-column="32" selection-end-line="28" selection-end-column="32" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/reverseproxy/handler.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="510">
-          <caret line="35" column="10" lean-forward="true" selection-start-line="35" selection-start-column="10" selection-end-line="35" selection-end-column="10" />
         </state>
       </provider>
     </entry>
@@ -375,6 +366,34 @@
       <provider selected="true" editor-type-id="text-editor">
         <state>
           <caret lean-forward="true" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/reverseproxy/responsemodifier.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1649">
+          <caret line="10" column="1" selection-start-line="10" selection-start-column="1" selection-end-line="10" selection-end-column="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/reverseproxy/requestinspector.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="278">
+          <caret line="43" lean-forward="true" selection-start-line="43" selection-end-line="43" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/reverseproxy/handler.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret lean-forward="true" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/reverseproxy/constants.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="136">
+          <caret line="8" lean-forward="true" selection-start-line="8" selection-end-line="8" />
         </state>
       </provider>
     </entry>
