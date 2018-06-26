@@ -10,13 +10,13 @@ type JsonQuery interface {
 }
 
 type jsonQuery struct {
-	path string
+	path      string
 	separator string
 }
 
 func NewJsonQuery(path string, separator string) *jsonQuery {
 	return &jsonQuery{
-		path: path,
+		path:      path,
 		separator: separator,
 	}
 }
@@ -24,7 +24,7 @@ func NewJsonQuery(path string, separator string) *jsonQuery {
 func (q jsonQuery) GetSubNodes(jsonData []interface{}) (nodes []interface{}, err error) {
 	defer func() {
 		if recover() != nil {
-			err = errors.New("unable to convert supplied json")
+			err = errors.New("unable to get subnodes of supplied json")
 		}
 	}()
 
@@ -36,6 +36,7 @@ func (q jsonQuery) getSubNodes(path string, data []interface{}) (nodes []interfa
 
 	// if last node in path...
 	if len(paths) == 1 {
+		// only supporting * (all nodes) at the moment...
 		if paths[0] != "*" {
 			return nil, errors.New("last path must be *")
 		}
