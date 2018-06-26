@@ -3,6 +3,8 @@ package jquery
 import (
 	"testing"
 	"encoding/json"
+	"errors"
+	"fmt"
 )
 
 func Test_Convert_SimpleJson_ReturnPlayerNodesArrays(t *testing.T) {
@@ -12,66 +14,77 @@ func Test_Convert_SimpleJson_ReturnPlayerNodesArrays(t *testing.T) {
 	expectedResult := `[{"id":100},{"id":101},{"id":110},{"id":111},{"id":200},{"id":201},{"id":210},{"id":211}]`
 
 	jquery := NewJsonQuery("rosters/players/*", "/")
-	bytes := []byte(testJson)
-	var data []interface{}
-	err := json.Unmarshal(bytes, &data)
+	subNodesJson, err := getSubNnodesFromJson(testJson, jquery)
 	if err != nil {
-		t.Errorf("Unable to unmarshal test json bytes. %s", err.Error())
+		t.Errorf("An unexpected error occured when querying json. %s", err)
 	}
 
-	subNodes, err := jquery.GetSubNodes(data)
-	if err != nil {
-		t.Errorf("Unable to convert test json data. %s", err.Error())
-	}
-
-	subNodesBytes, err := json.Marshal(subNodes)
-	if err != nil {
-		t.Errorf("Unable to marshal test json data. %s", err.Error())
-	}
-
-	if  subNodesString := string(subNodesBytes); subNodesString != expectedResult {
+	if  subNodesJson != expectedResult {
 		t.Errorf(
-			"Converted json does not match the expected result, got: \"%s\", want: \"%s\".",
-			subNodesString,
+			"Json does not match the expected result, got: \"%s\", want: \"%s\".",
+			subNodesJson,
 			expectedResult)
 	}
 }
 
-func Test_Convert_StrangeJson_ReturnEmptyArray(t *testing.T) {
-	testJson :=
-		`[{"id":1}, {"id":2}]`
+func Test_Convert_StrangeJson_ReturnNil(t *testing.T) {
+	testJson :=	`[{"id":1}, {"id":2}]`
+	var expectedResult string = "null"
 
-	conv := NewJsonQuery("rosters/players/*", "/")
-	bytes := []byte(testJson)
-	var data []interface{}
-	err := json.Unmarshal(bytes, &data)
+	jquery := NewJsonQuery("rosters/players/*", "/")
+	subNodesJson, err := getSubNnodesFromJson(testJson, jquery)
 	if err != nil {
-		t.Errorf("Unable to unmarshal test json bytes. %s", err.Error())
+		t.Errorf("An unexpected error occured when querying json. %s", err)
 	}
 
-	res, err := conv.GetSubNodes(data)
-	if err != nil {
-		t.Errorf("An unexpected error occured when converting json. %s", err)
-	}
-	if len(res) != 0 {
-		t.Errorf("Non zero array returned.")
+	if  subNodesJson != expectedResult {
+		t.Errorf(
+			"Json does not match the expected result, got: \"%s\", want: \"%s\".",
+			subNodesJson,
+			expectedResult)
 	}
 }
 
 func Test_Players_Convert_EmptyArrays_NoErrorReturned(t *testing.T) {
 	testJson :=
 		`[{"id":1,"rosters":[{"id":10,"players":[]},{"id":11,"players":[{"id":110},{"id":111}]}]},{"id":2,"rosters":[]}]`
+	expectedResult := `[{"id":110},{"id":111}]`
 
-	conv := NewJsonQuery("rosters/players/*", "/")
-	bytes := []byte(testJson)
+	jquery := NewJsonQuery("rosters/players/*", "/")
+	subNodesJson, err := getSubNnodesFromJson(testJson, jquery)
+	if err != nil {
+		t.Errorf("An unexpected error occured when querying json. %s", err)
+	}
+
+	if  subNodesJson != expectedResult {
+		t.Errorf(
+			"Json does not match the expected result, got: \"%s\", want: \"%s\".",
+			subNodesJson,
+			expectedResult)
+	}
+}
+
+func getSubNnodesFromJson(jsondata string, jquery JsonQuery) (outjson string, err error) {
+	bytes := []byte(jsondata)
 	var data []interface{}
-	err := json.Unmarshal(bytes, &data)
-	if err != nil {
-		t.Errorf("Unable to unmarshal test json bytes. %s", err.Error())
+
+	if e := json.Unmarshal(bytes, &data); e != nil {
+		err = errors.New(fmt.Sprintf("Unable to unmarshal test json bytes. %s", e.Error()))
+		return
 	}
 
-	_, err = conv.GetSubNodes(data)
-	if err != nil {
-		t.Errorf("Unexpected error occured when converting empty nodes. %s", err.Error())
+	subNodes, e := jquery.GetSubNodes(data)
+	if e != nil {
+		err = errors.New(fmt.Sprintf("Unable to convert test json data. %s", e.Error()))
+		return
 	}
+
+	subNodesBytes, e := json.Marshal(subNodes)
+	if e != nil {
+		err = errors.New(fmt.Sprintf("Unable to marshal test json data. %s", e.Error()))
+		return
+	}
+
+	outjson = string(subNodesBytes)
+	return
 }
