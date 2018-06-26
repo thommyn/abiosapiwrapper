@@ -24,11 +24,11 @@ __port__: server port
 __timePerRequest__: average time (ms) between two consecutive requests  
 __burstRequests__: maximum number of burst requests in a row  
 __allowedQueryParameters__: array of allowed parameters in query string  
-__routes__: reverse proxy routes ...  
-  "end point 1": {"host": "host address 1", "jquery": "jquery string"},  
-  "end point 2": {"host": "host address 2", "jquery": "jquery string"},  
-  ...  
-  "end point n": {"host": "host address n", "jquery": "jquery string"},  
+__routes__: reverse proxy routes, specified as...  
+$\qquad$ "end point 1": {"host": "host address 1", "jquery": "jquery string"},  
+$\qquad$ "end point 2": {"host": "host address 2", "jquery": "jquery string"},  
+$\qquad$ ...  
+$\qquad$ "end point n": {"host": "host address n", "jquery": "jquery string"},  
   
 jquery is specified according to node_1/node_2/.../node_n/\*, where \* gets all nodes as an array.  
 
