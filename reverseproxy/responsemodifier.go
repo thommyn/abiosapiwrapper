@@ -10,12 +10,6 @@ import (
 	"compress/gzip"
 )
 
-const HttpSuccessOk int = 200
-const HttpHeaderContentEncoding string = "Content-Encoding"
-const HttpHeaderContentLength string = "Content-Length"
-const HttpHeaderContentEncodingType string = "gzip"
-const JsonDataNodeName string = "data"
-
 type ResponseModifier interface {
 	Get() func(*http.Response) error
 }
