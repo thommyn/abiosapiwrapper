@@ -15,8 +15,8 @@ type Config struct {
 	Port string
 	Routes map[string]Target
 	AllowedQueryParameters []string
-	TimePerToken int64
-	BurstTokens int64
+	TimePerRequest int64
+	BurstRequests int64
 }
 
 func LoadConfig(path string) (*Config, error) {

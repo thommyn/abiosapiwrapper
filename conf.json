@@ -1,9 +1,9 @@
 {
   "ip": "localhost",
   "port": "5005",
-  "timePerToken": 2000,
-  "burstTokens": 5,
-  "allowedqueryparameters": ["access_token", "page"],
+  "timePerRequest": 2000,
+  "burstRequests": 5,
+  "allowedQueryParameters": ["access_token", "page"],
   "routes": {
     "/series/live": {"host": "https://api.abiosgaming.com/v2/series?starts_before=now&is_over=false", "jquery": "*"},
     "/players/live": {"host": "https://api.abiosgaming.com/v2/series?starts_before=now&is_over=false", "jquery": "rosters/players/*"},

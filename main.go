@@ -48,7 +48,7 @@ func setupDependencies(conf *config.Config) {
 
 	clock := tokenbucket.NewClock()
 	metric := tokenbucket.NewTimeMetric()
-	tokenBucket = tokenbucket.NewStandardTokenBucket(clock, metric, conf.TimePerToken, conf.BurstTokens)
+	tokenBucket = tokenbucket.NewStandardTokenBucket(clock, metric, conf.TimePerRequest, conf.BurstRequests)
 
 	transporter = reverseproxy.NewHttpTransport()
 
