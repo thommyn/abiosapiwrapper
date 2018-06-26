@@ -12,17 +12,17 @@ type Handler interface {
 }
 
 type httpHandler struct {
-	p *httputil.ReverseProxy
+	p       *httputil.ReverseProxy
 	reqinsp RequestInspector
-	tb tokenbucket.TokenBucket
+	tb      tokenbucket.TokenBucket
 }
 
 func NewHttpHandler(p *httputil.ReverseProxy, reqinsp RequestInspector,
 	tb tokenbucket.TokenBucket) Handler {
 	return &httpHandler{
-		p: p,
+		p:       p,
 		reqinsp: reqinsp,
-		tb: tb,
+		tb:      tb,
 	}
 }
 
