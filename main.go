@@ -68,7 +68,7 @@ func initRoutes(routes map[string]config.Target, transporter reverseproxy.Transp
 		}
 
 		// setup a handler for specified target...
-		responseModifier := reverseproxy.NewJsonConvResponseModifier(jquery)
+		responseModifier := reverseproxy.NewJsonQueryResponseModifier(jquery)
 		director := reverseproxy.NewTargetDirector(targetUrl)
 		p := reverseproxy.NewReverseProxy(director, responseModifier, transporter)
 		handler := reverseproxy.NewHttpHandler(p, inspector, tokenBucket)

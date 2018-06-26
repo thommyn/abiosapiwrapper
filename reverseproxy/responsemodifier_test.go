@@ -40,7 +40,7 @@ func getFakeHttpResponse() *http.Response {
 }
 
 func Test_ModifyResponseFunc_StatusCode402_ReturnsUnmodifiedBody(t *testing.T) {
-	responseModifier := NewJsonConvResponseModifier(&staticJsonQuery{})
+	responseModifier := NewJsonQueryResponseModifier(&staticJsonQuery{})
 	fakeHttpResponse := getFakeHttpResponse()
 	fakeHttpResponse.StatusCode = 402
 
@@ -59,7 +59,7 @@ func Test_ModifyResponseFunc_StatusCode402_ReturnsUnmodifiedBody(t *testing.T) {
 }
 
 func Test_ModifyResponseFunc_NilConverter_ReturnsUnmodifiedBody(t *testing.T) {
-	responseModifier := NewJsonConvResponseModifier(nil)
+	responseModifier := NewJsonQueryResponseModifier(nil)
 	fakeHttpResponse := getFakeHttpResponse()
 	hash1 := hash(fakeHttpResponse)
 
@@ -81,7 +81,7 @@ func Test_ModifyResponseFunc_ReturnsCorrectModifedResponse(t *testing.T) {
 	expectedStatusCode := 200
 	expectedContentLengthHeaderValue := strconv.Itoa(expectedContentLength)
 
-	responseModifier := NewJsonConvResponseModifier(&staticJsonQuery{})
+	responseModifier := NewJsonQueryResponseModifier(&staticJsonQuery{})
 	fakeHttpResponse := getFakeHttpResponse()
 
 	err := responseModifier.Get()(fakeHttpResponse)

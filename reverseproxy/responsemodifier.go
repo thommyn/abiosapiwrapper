@@ -18,7 +18,7 @@ type jsonQueryResponseModifier struct {
 	converter jquery.JsonQuery
 }
 
-func NewJsonConvResponseModifier(converter jquery.JsonQuery) ResponseModifier {
+func NewJsonQueryResponseModifier(converter jquery.JsonQuery) ResponseModifier {
 	return &jsonQueryResponseModifier {
 		converter: converter,
 	}
