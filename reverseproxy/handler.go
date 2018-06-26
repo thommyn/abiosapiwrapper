@@ -35,7 +35,7 @@ func (hh httpHandler) handlerFunc(w http.ResponseWriter, req *http.Request) {
 	// inspect request
 	if err := hh.reqinsp.Inspect(req); err != nil {
 		log.Println(err.Error())
-		http.Error(w, err.Error(), 403)
+		http.Error(w, err.Error(), HttpClientErrorForbidden)
 		return
 	}
 
@@ -43,7 +43,7 @@ func (hh httpHandler) handlerFunc(w http.ResponseWriter, req *http.Request) {
 	// TODO: Rollback consume if error occurs in ServeHTTP?
 	if err := hh.tb.ConsumeOneToken(); err != nil {
 		log.Println(err.Error())
-		http.Error(w, err.Error(), 403)
+		http.Error(w, err.Error(), HttpClientErrorForbidden)
 		return
 	}
 
