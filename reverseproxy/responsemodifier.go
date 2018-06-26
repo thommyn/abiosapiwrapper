@@ -10,17 +10,23 @@ import (
 	"compress/gzip"
 )
 
+const HttpSuccessOk int = 200
+const HttpHeaderContentEncoding string = "Content-Encoding"
+const HttpHeaderContentLength string = "Content-Length"
+const HttpHeaderContentEncodingType string = "gzip"
+const JsonDataNodeName string = "data"
+
 type ResponseModifier interface {
 	Get() func(*http.Response) error
 }
 
 type jsonQueryResponseModifier struct {
-	converter jquery.JsonQuery
+	jsonquery jquery.JsonQuery
 }
 
-func NewJsonQueryResponseModifier(converter jquery.JsonQuery) ResponseModifier {
+func NewJsonQueryResponseModifier(jsonquery jquery.JsonQuery) ResponseModifier {
 	return &jsonQueryResponseModifier {
-		converter: converter,
+		jsonquery: jsonquery,
 	}
 }
 
@@ -30,16 +36,16 @@ func (rm jsonQueryResponseModifier) Get() func(*http.Response) error {
 
 func (rm jsonQueryResponseModifier) modifyResponseFunc(resp *http.Response) error {
 	// no converter, just return...
-	if rm.converter == nil {
+	if rm.jsonquery == nil {
 		return nil
 	}
 
 	// if response status code is not 200 OK, just return...
-	if resp.StatusCode != 200 {
+	if resp.StatusCode != HttpSuccessOk {
 		return nil
 	}
 
-	newrespbody, err := rm.getConvertedResponseBody(resp)
+	newrespbody, err := rm.getSubNodesFromResponseBody(resp)
 	if err != nil {
 		return err
 	}
@@ -50,7 +56,7 @@ func (rm jsonQueryResponseModifier) modifyResponseFunc(resp *http.Response) erro
 	return nil
 }
 
-func (rm jsonQueryResponseModifier) getConvertedResponseBody(resp *http.Response) ([]byte, error) {
+func (rm jsonQueryResponseModifier) getSubNodesFromResponseBody(resp *http.Response) ([]byte, error) {
 	// get json form body content
 	injson, err := rm.readBodyJson(resp)
 	if err != nil {
@@ -58,14 +64,14 @@ func (rm jsonQueryResponseModifier) getConvertedResponseBody(resp *http.Response
 	}
 
 	// convert json with supplied jsonconv method
-	data := injson["data"].([]interface{})
-	outjson, err := rm.converter.GetSubNodes(data)
+	data := injson[JsonDataNodeName].([]interface{})
+	subNodes, err := rm.jsonquery.GetSubNodes(data)
 	if err != nil {
 		return nil, err
 	}
 
 	// overwrite data node with new converted json
-	injson["data"] = outjson
+	injson[JsonDataNodeName] = subNodes
 	newrespbody, err := json.Marshal(injson)
 	if err != nil {
 		return nil, err
@@ -94,8 +100,8 @@ func (rm jsonQueryResponseModifier) readBodyJson(resp *http.Response) (map[strin
 func (rm jsonQueryResponseModifier) getBodyDecoder(resp *http.Response) (*json.Decoder, error) {
 	var decoder *json.Decoder
 
-	switch resp.Header.Get("Content-Encoding") {
-	case "gzip":
+	switch resp.Header.Get(HttpHeaderContentEncoding) {
+	case HttpHeaderContentEncodingType:
 		gz, err := gzip.NewReader(resp.Body)
 		if err != nil {
 			return nil, err
@@ -121,16 +127,16 @@ func (rm jsonQueryResponseModifier) updateResponseBody(resp *http.Response, newr
 
 	// overwrite Content-Length if present in header
 	resp.ContentLength = int64(contentLength)
-	if resp.Header.Get("Content-Length") != "" {
-		resp.Header.Set("Content-Length", strconv.Itoa(contentLength))
+	if resp.Header.Get(HttpHeaderContentLength) != "" {
+		resp.Header.Set(HttpHeaderContentLength, strconv.Itoa(contentLength))
 	}
 
 	return nil
 }
 
 func (rm jsonQueryResponseModifier) getBodyBytesBuffer(resp *http.Response, newrespbody []byte) (buf *bytes.Buffer, err error) {
-	switch resp.Header.Get("Content-Encoding") {
-	case "gzip":
+	switch resp.Header.Get(HttpHeaderContentEncoding) {
+	case HttpHeaderContentEncodingType:
 		buf, err = rm.encodeContentAsGzip(newrespbody)
 		if err != nil {
 			return nil, err
